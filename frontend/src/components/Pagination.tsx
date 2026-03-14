@@ -18,7 +18,7 @@ export default function Pagination({ currentPage, totalCount, pageSize, onPageCh
   const last_page = Math.max(1, Math.ceil(totalCount / pageSize));
   const [pages, setPages] = useState<[number, number, number, number, number]>([1, 2, 3, 4, 5]);
 
-  function setNewPage(pageNum: number): [number, number, number, number, number] {
+function setNewPage(pageNum: number): [number, number, number, number, number] {
     if (last_page >= 6) {
       if (pageNum < 3) {
         setPages([1, 2, 3, 4, 5]);
@@ -33,7 +33,9 @@ export default function Pagination({ currentPage, totalCount, pageSize, onPageCh
         return newPages;
       }
     }
-    return pages;
+        const fallbackPages: [number, number, number, number, number] = [1, 2, 3, 4, 5];
+    setPages(fallbackPages);
+    return fallbackPages;
   }
 
   useEffect(() => {
