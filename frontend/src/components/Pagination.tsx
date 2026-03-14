@@ -42,7 +42,7 @@ export default function Pagination({ currentPage, totalCount, pageSize, onPageCh
     } else if (last_page <= 5) {
       setPages([1, 2, 3, 4, 5]);
     }
-  }, [totalCount]);
+  }, [totalCount, currentPage, last_page]);
 
   return <> <div>
     <button disabled={currentPage === first_page}
