@@ -189,7 +189,8 @@ describe('onPageChange callback', () => {
 
   test('clicking Last on a small dataset goes to lastPage with filtered window', async () => {
     const user = userEvent.setup();
-    // totalCount=30, pageSize=10 -> lastPage=3
+    // totalCount=30 -> lastPage=3. 
+    // The window should be [1, 2, 3, 4, 5] but must be filtered to [1, 2, 3]
     const { onPageChange } = renderPagination(1, 30, 10);
 
     await user.click(screen.getByRole('button', { name: 'Last' }));
