@@ -75,7 +75,7 @@ function setNewPage(pageNum: number): [number, number, number, number, number] {
             const newPages = setNewPage(page);
             onPageChange(page, newPages);
           }}
-          key={index}
+          key={page}
           name={`page-${page}`}
         >
           {page}
