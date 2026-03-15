@@ -189,13 +189,12 @@ describe('onPageChange callback', () => {
 
   test('clicking Last on a small dataset goes to lastPage with filtered window', async () => {
     const user = userEvent.setup();
-    // totalCount=30 → lastPage=3; tail window = [lastPage-4..lastPage] but lastPage≤5
-    // so getPageWindow(3, 3) → [1,2,3,4,5] filtered to ≤3 → [1,2,3]
+    // totalCount=30, pageSize=10 -> lastPage=3
     const { onPageChange } = renderPagination(1, 30, 10);
 
     await user.click(screen.getByRole('button', { name: 'Last' }));
 
-    expect(onPageChange).toHaveBeenCalledWith(3, [1, 2, 3, 4, 5]);
+    expect(onPageChange).toHaveBeenCalledWith(3, [1, 2, 3]);
   });
 });
 
@@ -240,10 +239,10 @@ describe('clamping via keyboard / programmatic edge cases', () => {
     expect(calledPage).toBeLessThanOrEqual(20);
   });
 
-  test('newCachePages returned from onPageChange only contains pages ≤ lastPage', async () => {
+ test('newCachePages returned from onPageChange only contains pages ≤ lastPage', async () => {
     const user = userEvent.setup();
     const onPageChange = jest.fn();
-    // 2 pages; clicking page-2 button
+    
     render(
       <Pagination
         currentPage={1}
@@ -252,10 +251,12 @@ describe('clamping via keyboard / programmatic edge cases', () => {
         onPageChange={onPageChange}
       />,
     );
+
     await user.click(screen.getByRole('button', { name: '2' }));
+
     const [, cachePages] = onPageChange.mock.calls[0] as [number, number[]];
-    // getPageWindow(2, 2) → [1,2,3,4,5]; the component passes the raw window; verify
-    // all values passed are ≥1 (component does not filter window in callback, only in render)
-    expect(cachePages.every((p: number) => p >= 1)).toBe(true);
+    
+    expect(cachePages.every((p: number) => p <= 2)).toBe(true);
+    expect(cachePages).toEqual([1, 2]); 
   });
 });
