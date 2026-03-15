@@ -5,7 +5,7 @@ import { useNotes } from '../contexts/NoteContext';
 export default function HomePage() {
   const { state, dispatch } = useNotes();
 
-  function handlePageChange(newPage: number, newCachePages: [number, number, number, number, number]) {
+  function handlePageChange(newPage: number, newCachePages: number[]) {
     dispatch({ type: 'setPage', page: newPage });
     dispatch({ type: 'updateCachePages', pages: newCachePages });
   }

@@ -6,7 +6,7 @@ type PaginationProps = {
   currentPage: number;
   totalCount: number;
   pageSize: number;
-  onPageChange: (newPage: number, newCachePages: [number, number, number, number, number]) => void;
+  onPageChange: (newPage: number, newCachePages: number[]) => void;
 };
 
 
