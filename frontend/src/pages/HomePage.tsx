@@ -6,8 +6,8 @@ export default function HomePage() {
   const { state, dispatch } = useNotes();
 
   function handlePageChange(newPage: number, newCachePages: number[]) {
-    dispatch({ type: 'setPage', page: newPage });
     dispatch({ type: 'updateCachePages', pages: newCachePages });
+    dispatch({ type: 'setPage', page: newPage });
   }
 
   return (
