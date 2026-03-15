@@ -38,11 +38,18 @@ function setNewPage(pageNum: number): [number, number, number, number, number] {
     return fallbackPages;
   }
 
-  useEffect(() => {
-    if (currentPage >= 3 && currentPage >= lastPage - 2 && lastPage >= 6) {
-      setPages([lastPage - 4, lastPage - 3, lastPage - 2, lastPage - 1, lastPage]);
-    } else if (lastPage <= 5) {
+useEffect(() => {
+    if (lastPage <= 5) {
       setPages([1, 2, 3, 4, 5]);
+    } 
+    else if (currentPage < 3) {
+      setPages([1, 2, 3, 4, 5]);
+    } 
+    else if (currentPage >= lastPage - 2) {
+      setPages([lastPage - 4, lastPage - 3, lastPage - 2, lastPage - 1, lastPage]);
+    } 
+    else {
+      setPages([currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2]);
     }
   }, [totalCount, currentPage, lastPage]);
 
