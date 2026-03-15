@@ -10,25 +10,25 @@ type PaginationProps = {
 };
 
 
-const first_page = 1;
+const firstPage = 1;
 
 
 export default function Pagination({ currentPage, totalCount, pageSize, onPageChange }: PaginationProps) {
 
-  const last_page = Math.max(1, Math.ceil(totalCount / pageSize));
+  const lastPage = Math.max(1, Math.ceil(totalCount / pageSize));
   const [pages, setPages] = useState<[number, number, number, number, number]>([1, 2, 3, 4, 5]);
 
 function setNewPage(pageNum: number): [number, number, number, number, number] {
-    if (last_page >= 6) {
+    if (lastPage >= 6) {
       if (pageNum < 3) {
         setPages([1, 2, 3, 4, 5]);
         return [1, 2, 3, 4, 5];
-      } else if (pageNum >= 3 && pageNum <= last_page - 2) {
+      } else if (pageNum >= 3 && pageNum <= lastPage - 2) {
         const newPages: [number, number, number, number, number] = [pageNum - 2, pageNum - 1, pageNum, pageNum + 1, pageNum + 2];
         setPages(newPages);
         return newPages;
       } else {
-        const newPages: [number, number, number, number, number] = [last_page - 4, last_page - 3, last_page - 2, last_page - 1, last_page];
+        const newPages: [number, number, number, number, number] = [lastPage - 4, lastPage - 3, lastPage - 2, lastPage - 1, lastPage];
         setPages(newPages);
         return newPages;
       }
@@ -39,22 +39,22 @@ function setNewPage(pageNum: number): [number, number, number, number, number] {
   }
 
   useEffect(() => {
-    if (currentPage >= 3 && currentPage >= last_page - 2 && last_page >= 6) {
-      setPages([last_page - 4, last_page - 3, last_page - 2, last_page - 1, last_page]);
-    } else if (last_page <= 5) {
+    if (currentPage >= 3 && currentPage >= lastPage - 2 && lastPage >= 6) {
+      setPages([lastPage - 4, lastPage - 3, lastPage - 2, lastPage - 1, lastPage]);
+    } else if (lastPage <= 5) {
       setPages([1, 2, 3, 4, 5]);
     }
-  }, [totalCount, currentPage, last_page]);
+  }, [totalCount, currentPage, lastPage]);
 
   return <> <div>
-    <button disabled={currentPage === first_page}
+    <button disabled={currentPage === firstPage}
       onClick={() => {
-        onPageChange(first_page, [1, 2, 3, 4, 5]);
+        onPageChange(firstPage, [1, 2, 3, 4, 5]);
         setPages([1, 2, 3, 4, 5]);
       }}
       className="page" name="first">First</button>
 
-    <button disabled={currentPage === first_page}
+    <button disabled={currentPage === firstPage}
       onClick={() => {
         const pageNum = currentPage - 1;
         const newPages = setNewPage(pageNum);
@@ -65,8 +65,8 @@ function setNewPage(pageNum: number): [number, number, number, number, number] {
     </button>
 
     {pages
-      .filter(page => page <= last_page)
-      .map((page, index) => (
+      .filter(page => page <= lastPage)
+      .map((page, _) => (
         <button
           disabled={currentPage === page}
           className={`page ${page === currentPage ? 'active' : ''}`}
@@ -83,7 +83,7 @@ function setNewPage(pageNum: number): [number, number, number, number, number] {
       ))}
 
     <button
-      disabled={currentPage === last_page}
+      disabled={currentPage === lastPage}
       onClick={() => {
         const pageNum = currentPage + 1;
         const newPages = setNewPage(pageNum);
@@ -92,10 +92,10 @@ function setNewPage(pageNum: number): [number, number, number, number, number] {
       className="page"
       name="next">Next</button>
 
-    <button disabled={currentPage === last_page}
+    <button disabled={currentPage === lastPage}
       onClick={() => {
-        const newPages = setNewPage(last_page);
-        onPageChange(last_page, newPages);
+        const newPages = setNewPage(lastPage);
+        onPageChange(lastPage, newPages);
       }}
       className="page"
       name="last">Last</button>
