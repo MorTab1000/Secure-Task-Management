@@ -53,7 +53,7 @@ Playwright tests are in `frontend/playwright-tests/test.spec.ts`. The root-level
 Standard Express layered architecture:
 
 - `server.ts` → loads `.env`, connects MongoDB, starts server
-- `expressApp.ts` → configures Express with CORS (origin: `localhost:3000`), middleware, and routes
+- `expressApp.ts` → configures Express with CORS (origin: `http://localhost:3000`), middleware, and routes
 - `routes/` → mounts controllers; note routes apply `tokenExtractor` + `userExtractor` middleware for auth
 - `controllers/` → handles HTTP; delegates to `services/`
 - `services/` → business logic and Mongoose queries
