@@ -28,9 +28,10 @@ export default function Pagination({ currentPage, totalCount, pageSize, onPageCh
   const lastPage = Math.max(1, Math.ceil(totalCount / pageSize));
   const pages = getPageWindow(currentPage, lastPage);
 
-  const handlePageClick = (newPage: number) => {
-    const nextCachePages = getPageWindow(newPage, lastPage);
-    onPageChange(newPage, nextCachePages);
+const handlePageClick = (newPage: number) => {
+    const safePage = Math.max(1, Math.min(newPage, lastPage)); //clamp page number to valid range    
+    const nextCachePages = getPageWindow(safePage, lastPage);
+    onPageChange(safePage, nextCachePages);
   };
 
   return <div>
