@@ -18,7 +18,7 @@ export const getAllNotes = async (req: Request, res: Response) => {
 
 export const getNoteById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     if (!id) {
       res.status(400).json({ message: 'Note ID is required' });
     }
@@ -44,7 +44,7 @@ export const createNote = async (req: Request, res: Response) => {
 
 export const updateNoteById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     if (!id) {
       res.status(400).json({ message: 'Note ID is required' });
     }
@@ -57,7 +57,7 @@ export const updateNoteById = async (req: Request, res: Response) => {
 
 export const deleteNoteById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     if (!id) {
       res.status(400).json({ message: 'Note ID is required' });
     }
@@ -70,7 +70,7 @@ export const deleteNoteById = async (req: Request, res: Response) => {
 
 export const getNoteByIndex = async (req: Request, res: Response) => {
   try {
-    const { i } = req.params;
+    const i = req.params.i as string;
     if (!i || isNaN(parseInt(i))) {
       res.status(400).json({ message: 'Invalid index parameter' });
     }
@@ -84,7 +84,7 @@ export const getNoteByIndex = async (req: Request, res: Response) => {
 export const updateNoteByIndex = async (req: Request, res: Response) => {
   try {
 
-    const { i } = req.params;
+    const i = req.params.i as string;
     if (!i || isNaN(parseInt(i))) {
       res.status(400).json({ message: 'Invalid index parameter' });
     }
@@ -97,7 +97,7 @@ export const updateNoteByIndex = async (req: Request, res: Response) => {
 
 export const deleteNoteByIndex = async (req: Request, res: Response) => {
   try {
-    const { i } = req.params;
+    const i = req.params.i as string;
     if (!i || isNaN(parseInt(i))) {
       res.status(400).json({ message: 'Invalid index parameter' });
     }
