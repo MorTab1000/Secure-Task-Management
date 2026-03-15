@@ -204,7 +204,7 @@ describe('onPageChange callback', () => {
 // ---------------------------------------------------------------------------
 
 describe('clamping via keyboard / programmatic edge cases', () => {
-  test('currentPage=1 clicking Previous still calls onPageChange with page 1 (clamped)', async () => {
+  test('clicking Previous from page 2 calls onPageChange with page 1 (clamped and valid)', async () => {
     // Previous is disabled at page 1, so this tests the clamp directly by calling
     // a page-1 click while lastPage>1 — we verify the safePage guard is consistent.
     const user = userEvent.setup();
