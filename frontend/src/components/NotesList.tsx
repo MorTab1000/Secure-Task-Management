@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Pagination from "./pagination";
 import AddNewNote from "./AddNewNote";
 import { useNotes } from "../contexts/NoteContext";
 import {  useAuth } from "../contexts/AuthContext";
@@ -34,6 +33,5 @@ export default function NotesList() {
     {
       notes.map((note, index) => <Note key={index} {...note}></Note>)
     }
-    <Pagination />
   </>
 }
